@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Lola 💛</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: #ff6338;
+    transition: background 0.8s;
+}
+
+.container {
+    max-width: 340px;
+    padding: 20px;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.3);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="app"></div>
+
+<script>
+let estado = {
+    acto: 1,
+    amor: 0,
+    apoyo: 0,
+    alegria: 0,
+    calma: 0
+};
+
+const app = document.getElementById("app");
+
+function fondo(color) {
+    document.body.style.background = color;
+}
+
+function sumar(tipo, color) {
+    estado[tipo]++;
+    fondo(color);
+    estado.acto++;
+    siguiente();
+}
+
+function continuar(){
+    siguiente();
+}
+
+function siguiente() {
+    const a = estado.acto;
+
+    if (a === 1) acto1();
+    else if (a === 2) acto2();
+    else if (a === 3) mini1();
+    else if (a === 4) acto4();
+    else if (a === 5) acto5();
+    else if (a === 6) mini2();
+    else if (a === 7) acto7();
+    else if (a === 8) acto8();
+    else if (a === 9) acto9();
+    else if (a === 10) final();
+}
+
+/* ACTO 1 */
+function acto1(){
+app.innerHTML = `
+<h2>💛</h2>
+<p>¿Por qué abriste esto mi amor?</p>
+<button onclick="sumar('amor','#f8bbd0')">Te extraño</button>
+<button onclick="sumar('alegria','#ffe082')">Estoy aburrida</button>
+<button onclick="sumar('calma','#64b5f6')">¿que no puedo?</button>
+`;
+}
+
+/* ACTO 2 */
+function acto2(){
+app.innerHTML = `
+<p>¿Qué es lo que necesitas ahora mi amor?</p>
+<button onclick="sumar('amor','#f8bbd0')">Un abrazo</button>
+<button onclick="sumar('apoyo','#66bb6a')">Que te escuchen</button>
+<button onclick="sumar('alegria','#ffe082')">Distraerte</button>
+`;
+}
+
+/* MINI JUEGO 1 */
+function mini1(){
+    estado.acto++;
+
+    app.innerHTML = `
+    <p>¿Qué te recuerda más a mí? 💭</p>
+
+    <button onclick="mini1Res('bosque')">🌳 El bosque</button>
+    <button onclick="mini1Res('risa')">😄 Tu risa</button>
+    <button onclick="mini1Res('abrazo')">🤍 Un abrazo</button>
+    `;
+}
+ function mini1Res(tipo){
+
+if(tipo === "bosque"){
+    estado.amor++;
+    fondo("#f8bbd0");
+
+    app.innerHTML = `
+    <p>
+    A mí también me recuerda a ti…<br><br>
+    esos momentos caminando juntos,<br>
+    donde todo se sentía más bonito
+    </p>
+    <button onclick="siguiente()">Seguir</button>
+    `;
+}
+
+if(tipo === "risa"){
+    estado.alegria++;
+    fondo("#ffe082");
+
+    app.innerHTML = `
+    <p>
+    Tu risa es de mis cosas favoritas…<br><br>
+    podría escucharla todo el día
+    </p>
+    <button onclick="siguiente()">Seguir</button>
+    `;
+}
+
+if(tipo === "abrazo"){
+    estado.calma++;
+    fondo("#64b5f6");
+
+    app.innerHTML = `
+    <p>
+    Un abrazo tuyo…<br><br>
+    es de los lugares donde más tranquilo me siento
+    </p>
+    <button onclick="siguiente()">Seguir</button>
+    `;
+}
+}
+
+function miniRes(e,c){
+if(e===c){estado.alegria++; fondo("#ffe082");}
+else{estado.calma++; fondo("#64b5f6");}
+estado.acto++;
+siguiente();
+}
+
+/* ACTO 4 (RECUERDOS REALES) */
+function acto4(){
+app.innerHTML = `
+<p>¿Qué prefieres recordar en este momento?</p>
+<button onclick="recuerdo('bonito')">Un momento bonito</button>
+<button onclick="recuerdo('tranquilo')">Algo tranquilo</button>
+<button onclick="recuerdo('risa')">Una risa</button>
+`;
+}
+
+function recuerdo(tipo){
+
+if(tipo === "bonito"){
+    estado.amor++;
+    fondo("#f8bbd0");
+
+    app.innerHTML = `
+    <p>
+    ¿Recuerdas cuando caminábamos en el bosque al terminar las clases…?<br><br>
+    solo para tener más tiempo juntos,<br>
+    hablar de lo que pasó en el día,<br>
+    besarnos cada 20 metros…<br><br>
+    o simplemente reírnos por nuestra esquizofrenia de pareja<br><br>
+    te amo bb 💛
+    </p>
+    <button onclick="continuar()">Seguir</button>
+    `;
+}
+
+if(tipo === "tranquilo"){
+    estado.calma++;
+    fondo("#64b5f6");
+
+    app.innerHTML = `
+    <p>
+    ¿Recuerdas cuando nos sentábamos en la fcv…?<br><br>
+    para hablar,<br>
+    y yo me quedaba dormido en tu regazo<br>
+    por la tranquilidad que me das…<br><br>
+    y tú tan tierna mirándome<br>
+    o tomándome fotos dormido y chueco 😴<br><br>
+    nadie decía nada,<br>
+    pero estábamos juntos…<br>
+    uno al lado del otro
+    </p>
+    <button onclick="continuar()">Seguir</button>
+    `;
+}
+
+if(tipo === "risa"){
+    estado.alegria++;
+    fondo("#ffe082");
+
+    app.innerHTML = `
+    <p>
+    ¿Te acuerdas en la 112…?<br><br>
+    cuando a veces me daba alergia por acostarnos en el piso 😭<br><br>
+    y una de esas veces estornudé y salté al mismo tiempo…<br><br>
+    parecía Mario saltando JASJAS 🍄<br><br>
+    contigo hasta eso se vuelve un buen recuerdo
+    </p>
+    <button onclick="continuar()">Seguir</button>
+    `;
+}
+
+estado.acto++;
+}
+
+/* ACTO 5 */
+function acto5(){
+app.innerHTML = `
+<p>¿Qué soy para ti ahora?</p>
+<button onclick="sumar('alegria','#ffe082')">Alguien que te hace feliz</button>
+<button onclick="sumar('calma','#64b5f6')">Alguien que te calma</button>
+<button onclick="sumar('amor','#f8bbd0')">Alguien que te importa</button>
+`;
+}
+
+/* MINI JUEGO 2 */
+let secuencia = [];
+let paso = 0;
+
+function mini2(){
+    estado.acto++;
+    secuencia = generarSecuencia();
+    paso = 0;
+
+    mostrarSecuencia();
+}
+
+function generarSecuencia(){
+    const opciones = ["🌸","🌼","🌙"];
+    let arr = [];
+    for(let i=0;i<3;i++){
+        arr.push(opciones[Math.floor(Math.random()*3)]);
+    }
+    return arr;
+}
+
+function mostrarSecuencia(){
+    app.innerHTML = `
+    <p>Mira bien esta secuencia 👀</p>
+    <h2>${secuencia.join(" ")}</h2>
+    <button onclick="jugarMemoria()">Continuar</button>
+    `;
+}
+
+function jugarMemoria(){
+    app.innerHTML = `
+    <p>Repite la secuencia</p>
+    <div id="opciones"></div>
+    `;
+
+    const cont = document.getElementById("opciones");
+
+    ["🌸","🌼","🌙"].forEach(e => {
+        const b = document.createElement("button");
+        b.textContent = e;
+
+        b.onclick = () => verificar(e);
+        cont.appendChild(b);
+    });
+}
+
+function verificar(eleccion){
+    if(eleccion === secuencia[paso]){
+        paso++;
+        if(paso === secuencia.length){
+            estado.amor++;
+            fondo("#f8bbd0");
+            app.innerHTML = `
+            <p>💛 Lo hiciste perfecto</p>
+            <button onclick="siguiente()">Continuar</button>
+            `;
+        }
+    } else {
+        estado.calma++;
+        fondo("#64b5f6");
+        app.innerHTML = `
+        <p>😅 casi… pero igual me encantas</p>
+        <button onclick="siguiente()">Continuar</button>
+        `;
+    }
+}
+
+/* ACTO 7 */
+function acto7(){
+app.innerHTML = `
+<p>Si pudieras decirme algo ahora…</p>
+<button onclick="sumar('amor','#f8bbd0')">Te extraño</button>
+<button onclick="sumar('apoyo','#66bb6a')">Quédate</button>
+<button onclick="sumar('calma','#64b5f6')">Gracias</button>
+`;
+}
+
+/* ACTO 8 */
+function acto8(){
+app.innerHTML = `
+<p>Si estuviéramos juntos ahora…</p>
+<button onclick="sumar('amor','#f8bbd0')">Abrazados</button>
+<button onclick="sumar('calma','#64b5f6')">Hablando</button>
+<button onclick="sumar('alegria','#ffe082')">Riendo</button>
+`;
+}
+
+/* ACTO 9 */
+function acto9(){
+app.innerHTML = `
+<p>¿Qué quieres de mí?</p>
+<button onclick="sumar('amor','#f8bbd0')">Que esté contigo</button>
+<button onclick="sumar('alegria','#ffe082')">Que te haga feliz</button>
+<button onclick="sumar('apoyo','#66bb6a')">Que no me vaya</button>
+`;
+}
+
+/* FINAL */
+function final(){
+let max = Math.max(estado.amor,estado.apoyo,estado.alegria,estado.calma);
+
+if(max===estado.amor){
+fondo("#f8bbd0");
+app.innerHTML="<h2>💗 Yo también te extraño… más de lo que digo 💛</h2>";
+}
+else if(max===estado.apoyo){
+fondo("#66bb6a");
+app.innerHTML="<h2>💚 Siempre voy a estar para ti, sin importar nada</h2>";
+}
+else if(max===estado.alegria){
+fondo("#ffe082");
+app.innerHTML="<h2>💛 Me encanta hacerte feliz</h2>";
+}
+else{
+fondo("#64b5f6");
+app.innerHTML="<h2>💙 Contigo todo se siente en calma</h2>";
+}
+}
+
+siguiente();
+</script>
+
+</body>
+</html>
