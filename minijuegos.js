@@ -69,6 +69,9 @@ function decision(op){
    FLAPPY LOVE 💛
 ========================= */
 
+let vidas = 3;
+let esperando = false;
+
 let birdY, velocity, gravity;
 let obstaculos = [];
 let puntos = 0;
@@ -98,8 +101,11 @@ function iniciarFlappy(){
     gravity = 0.5;
 
     obstaculos = [];
+    if(!esperando){
     puntos = 0;
-    jugando = true;
+}
+jugando = true;
+esperando = false;
 
     /* CONTROLES */
     document.onclick = saltar;
@@ -134,6 +140,7 @@ function iniciarFlappy(){
         /* CORAZÓN */
         ctx.font = "20px Arial";
         ctx.fillText("💛", 140, birdY);
+        ctx.fillText("❤️ " + vidas, 240, 20);
 
         /* OBSTÁCULOS */
         obstaculos.forEach(o => {
@@ -201,10 +208,40 @@ function terminarFlappy(gano){
         <p>💛 cuidaste nuestro amor</p>
         <button onclick="siguiente()">Seguir</button>
         `);
+        return;
+    }
+
+    /* PIERDE UNA VIDA */
+    vidas--;
+
+    if(vidas > 0){
+        esperando = true;
+
+        cambiarPantalla(`
+        <p>💔 se cayó… pero aún nos quedan ${vidas} vidas</p>
+        <p>intentando de nuevo en 3...</p>
+        `);
+
+        let cuenta = 3;
+
+        const intervalo = setInterval(()=>{
+            cuenta--;
+
+            if(cuenta > 0){
+                cambiarPantalla(`
+                <p>💔 se cayó… pero aún nos quedan ${vidas} vidas</p>
+                <p>intentando de nuevo en ${cuenta}...</p>
+                `);
+            } else {
+                clearInterval(intervalo);
+                iniciarFlappy(); // 👈 reinicia solo
+            }
+        },1000);
+
     } else {
         estado.calma++;
         cambiarPantalla(`
-        <p>😅 a veces se cae… pero lo levantamos juntos</p>
+        <p>😅 se cayó… pero igual seguimos intentando 💛</p>
         <button onclick="siguiente()">Seguir</button>
         `);
     }
