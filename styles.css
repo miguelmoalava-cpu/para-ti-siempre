@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: white;
+    background: #ff6338;
+    transition: background 0.8s;
+}
+
+.container {
+    max-width: 340px;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.3);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+h2 {
+    margin-bottom: 10px;
+}
