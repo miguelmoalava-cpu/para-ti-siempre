@@ -22,22 +22,30 @@ function cambiarPantalla(html){
 }
 
 function progreso(){
+
+    const totalActos = 15; // 👈 cambia esto si agregas más
+
+    let porcentaje = ((estado.acto - 1) / totalActos) * 100;
+
+    if(porcentaje > 100) porcentaje = 100;
+
     return `<div style="
         width:100%;
         height:6px;
         background:rgba(255,255,255,0.2);
         border-radius:10px;
         margin-bottom:15px;
+        overflow:hidden;
     ">
         <div style="
-            width:${(estado.acto-1)*10}%;
+            width:${porcentaje}%;
             height:100%;
             background:white;
             border-radius:10px;
+            transition: width 0.5s;
         "></div>
     </div>`;
 }
-
 function sumar(tipo, color) {
     estado[tipo]++;
     fondo(color);
@@ -67,18 +75,26 @@ function inicio(){
 function siguiente() {
     const a = estado.acto;
 
-    if (a === 1) acto1();
-    else if (a === 2) acto2();
-    else if (a === 3) mini1();
-    else if (a === 4) acto4();
-    else if (a === 5) acto5();
-    else if (a === 6) miniFlappyReal();
-    else if (a === 7) miniDecision();
-    else if (a === 8) mini2();
-    else if (a === 9) acto7();
-    else if (a === 10) acto8();
-    else if (a === 11) acto9();
-    else if (a === 12) final();
+   if (a === 1) acto1();
+else if (a === 2) acto2();
+else if (a === 3) mini1();
+else if (a === 4) acto4();
+else if (a === 5) acto5();
+else if (a === 6) miniFlappyReal();
+else if (a === 7) miniDecision();
+else if (a === 8) mini2();
+else if (a === 9) acto7();
+else if (a === 10) acto8();
+else if (a === 11) acto9();
+
+/* 🔥 NUEVOS JUEGOS */
+else if (a === 12) miniMemoriaPro();
+else if (a === 13) miniPuzzlePro();
+else if (a === 14) miniLaberinto();
+
+/* FINAL SE MUEVE */
+else if (a === 15) final();
+
 }
 
 /* ACTO 1 */
